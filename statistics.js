@@ -1,5 +1,3 @@
-var members = data.results[0].members;
-
 var statistics = {
     numDem: 0,
     numRep: 0,
@@ -12,22 +10,96 @@ var statistics = {
     mostengagedvotes: 0,
 };
 
-
-var numMemb = members.length;
-//console.log(numMemb);
+var data;
+var members;
+var tenpercent;
 
 var numRep = [];
 var numDem = [];
 var numInd = [];
+var total = [];
+var leastloyalvotes = [];
+var mostloyalvotes = [];
+var leastengagedvotes = [];
+var mostengagedvotes = [];
+
+var withRep;
+var withDem;
+
+function calljson() {
+    if (document.getElementById("house") != null) {
+        fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+            method: "GET",
+            headers: {
+                'X-API-Key': 'JebvTH0Lq21PLdfWFIuBKejtHMcEmKRjW4Qq1txN'
+            }
+
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+
+        }).then(function (json) {
+            data = json;
+            members = data.results[0].members;
+            var numMemb = members.length;
+            var membersten = members.length * 0.1;
+            var tenpercent = Math.round(membersten);
+            memnumbers();
+            mempercent();
+            leastloyal();
+            mostloyal();
+            leastengaged();
+            mostengaged();
+            tablefillglance();
+            conditions();
+
+
+        }).catch(function (error) {
+            console.log("Request failed:" + error.message);
+        });
+    } else if (document.getElementById("senate") != null) {
+        fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+            method: "GET",
+            headers: {
+                'X-API-Key': 'JebvTH0Lq21PLdfWFIuBKejtHMcEmKRjW4Qq1txN'
+            }
+
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+
+        }).then(function (json) {
+            data = json;
+            members = data.results[0].members;
+            var numMemb = members.length;
+            var membersten = members.length * 0.1;
+            var tenpercent = Math.round(membersten);
+            memnumbers();
+            mempercent();
+            leastloyal();
+            mostloyal();
+            leastengaged();
+            mostengaged();
+            tablefillglance();
+            conditions();
+
+
+        }).catch(function (error) {
+            console.log("Request failed:" + error.message);
+        });
+
+    }
+}
+
+calljson();
 
 function memnumbers() {
-    //    console.log(members);
     for (var m = 0; m < members.length; m++) {
         var numParty = members[m].party;
-        //        console.log(numParty);
         if (numParty == "R") {
             numRep.push(members[m]);
-            //            console.log(members[m]);
         }
         if (numParty == "D") {
             numDem.push(members[m]);
@@ -36,19 +108,10 @@ function memnumbers() {
             numInd.push(members[m]);
         }
     }
-    //    console.log(numRep.length);
     statistics.numRep = numRep.length;
     statistics.numDem = numDem.length;
     statistics.numInd = numInd.length;
 }
-memnumbers();
-
-//3.2 number of votes with party
-
-var total = [];
-var withRep;
-var withDem;
-
 
 function mempercent() {
 
@@ -70,23 +133,12 @@ function mempercent() {
 
     var repTotal = Math.round(temp / statistics.numRep * 100) / 100;
     var demTotal = Math.round(temp2 / statistics.numDem * 100) / 100;
-    console.log(repTotal);
-    console.log(demTotal);
+    //    console.log(repTotal);
+    //    console.log(demTotal);
 
     statistics.withRep = repTotal;
     statistics.withDem = demTotal;
 }
-
-mempercent();
-
-//4 - members with least vote 
-
-var membersten = members.length * 0.1;
-var tenpercent = Math.round(membersten);
-
-//LEAST LOYAL
-
-var leastloyalvotes = [];
 
 function leastloyal() {
 
@@ -96,10 +148,12 @@ function leastloyal() {
         return a.missed_votes_pct - b.missed_votes_pct
     });
 
+    var membersten = members.length * 0.1;
+    var tenpercent = Math.round(membersten);
+
     for (var v = 0; v < tenpercent; v++) {
         var missedV = memcopy[v];
         leastloyalvotes.push(missedV);
-        //        console.log(leastloyalvotes);
     }
 
     for (var j = 0; j < members.length; j++) {
@@ -134,14 +188,6 @@ function leastloyalvotestable() {
     table.appendChild(tblBody);
 }
 
-leastloyal();
-
-console.log(leastloyalvotes);
-
-//MOST LOYAL
-
-var mostloyalvotes = [];
-
 function mostloyal() {
 
     var memcopy2 = members.slice(0);
@@ -149,9 +195,10 @@ function mostloyal() {
     memcopy2.sort(function (a, b) {
         return b.missed_votes_pct - a.missed_votes_pct
     });
-    //    console.log(memcopy2);
 
-
+    var membersten = members.length * 0.1;
+    var tenpercent = Math.round(membersten);
+    
     for (var v = 0; v < tenpercent; v++) {
         var missedV2 = memcopy2[v];
         mostloyalvotes.push(missedV2);
@@ -189,25 +236,18 @@ function mostloyalvotestable() {
     table.appendChild(tblBody);
 }
 
-mostloyal();
-
-console.log(mostloyalvotes);
-
-//LEAST ENGAGED
-
-var leastengagedvotes = [];
-
 function leastengaged() {
 
     var memcopy3 = members.slice(0);
     memcopy3.sort(function (a, b) {
         return a.votes_with_party_pct - b.votes_with_party_pct
     });
+    var membersten = members.length * 0.1;
+    var tenpercent = Math.round(membersten);
 
     for (var v = 0; v < tenpercent; v++) {
         var missedV = memcopy3[v];
         leastengagedvotes.push(missedV);
-        //        console.log(leastengagedvotes);
     }
 
     for (var j = 0; j < members.length; j++) {
@@ -245,15 +285,6 @@ function leastengagedtable() {
     table.appendChild(tblBody);
 }
 
-leastengaged();
-
-console.log(leastengagedvotes);
-
-
-//MOST ENGAGED
-
-var mostengagedvotes = [];
-
 function mostengaged() {
 
     var memcopy4 = members.slice(0);
@@ -261,8 +292,9 @@ function mostengaged() {
     memcopy4.sort(function (a, b) {
         return b.missed_votes_pct - a.missed_votes_pct
     });
-    //    console.log(memcopy2);
-
+    
+    var membersten = members.length * 0.1;
+    var tenpercent = Math.round(membersten);
 
     for (var v = 0; v < tenpercent; v++) {
         var missedV4 = memcopy4[v];
@@ -301,12 +333,6 @@ function mostengagedtable() {
     table.appendChild(tblBody);
 }
 
-mostengaged();
-
-console.log(mostengagedvotes);
-
-//TABLES 
-
 function tablefillglance() {
 
     document.getElementById("repreps").innerHTML = statistics.numRep;
@@ -317,18 +343,14 @@ function tablefillglance() {
     document.getElementById("demwith").innerHTML = statistics.withDem;
 }
 
-tablefillglance();
-
 function conditions() {
     if ((document.getElementById("senate-least-engaged") != null) && (document.getElementById("senate-most-engaged") != null)) {
         leastengagedtable();
         mostengagedtable();
     }
-
+    
     if ((document.getElementById("senate-most-loyal") != null) && (document.getElementById("senate-least-loyal") != null)) {
-            mostloyalvotestable();
-            leastloyalvotestable();
-        }
+        mostloyalvotestable();
+        leastloyalvotestable();
     }
-
-    conditions();
+}

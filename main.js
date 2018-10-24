@@ -49,7 +49,6 @@ function calljson() {
 
     }
 }
-//var members = data.results[0].members;
 
 calljson();
 
@@ -58,13 +57,11 @@ function tablecreate() {
     var table = document.getElementById("senate-table");
     var tblBody = document.createElement("tbody");
 
-
     for (var i = 0; i < members.length; i++) {
         var row = document.createElement("tr");
         var columnName = document.createElement("td");
         if (members[i].middle_name == null) {
             var name = members[i].first_name + " " + members[i].last_name;
-
         } else {
             var name = members[i].first_name + " " + members[i].middle_name + " " + members[i].last_name;
         }
@@ -90,14 +87,11 @@ function tablecreate() {
             columnParty.parentElement.setAttribute("class", "I")
         }
 
-
         var columnState = document.createElement("td");
         columnState.innerHTML = members[i].state;
 
         row.appendChild(columnState);
         columnState.parentElement.classList.add("class", members[i].state)
-
-
 
         var columnSeniority = document.createElement("td");
         columnSeniority.innerHTML = members[i].seniority;
@@ -111,16 +105,11 @@ function tablecreate() {
 
         table.appendChild(tblBody);
     }
-
 }
 
-
 function checkb() {
-
     var selectedv = document.getElementById("cstate").value;
-    console.log(selectedv);
     var tds = document.getElementsByTagName("tr");
-    console.log(tds);
     for (var s = 0; s < tds.length; s++) {
         tds[s].style.display = "none";
 
@@ -167,10 +156,8 @@ function filterbystates() {
             tds[i].style.display = "table-row";
         }
     }
-
     var thead = document.getElementById("tablehead");
     thead.style.display = "table-row";
-
 }
 
 function createStates() {
@@ -183,9 +170,7 @@ function createStates() {
     uniqueStates = states.filter(function (item, pos) {
         return states.indexOf(item) == pos;
     })
-    //
-    //    console.log(uniqueStates);
-
+    
     var stateoptions = document.getElementById("cstate");
 
     for (var x = 0; x < uniqueStates.length; x++) {
@@ -193,11 +178,4 @@ function createStates() {
         cstate.innerHTML = uniqueStates[x];
         stateoptions.appendChild(cstate);
     }
-
 }
-
-//
-//
-//createStates();
-//
-//tablecreate();

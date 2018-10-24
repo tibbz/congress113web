@@ -1,6 +1,57 @@
+var data;
+var members;
 
-var members = data.results[0].members;
+function calljson() {
+    if (document.getElementById("house") != null) {
+        fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+            method: "GET",
+            headers: {
+                'X-API-Key': 'JebvTH0Lq21PLdfWFIuBKejtHMcEmKRjW4Qq1txN'
+            }
 
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+
+        }).then(function (json) {
+            data = json;
+            members = data.results[0].members;
+            createStates();
+            tablecreate();
+
+
+        }).catch(function (error) {
+            console.log("Request failed:" + error.message);
+        });
+    } else if (document.getElementById("senate") != null) {
+        fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+            method: "GET",
+            headers: {
+                'X-API-Key': 'JebvTH0Lq21PLdfWFIuBKejtHMcEmKRjW4Qq1txN'
+            }
+
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+
+        }).then(function (json) {
+            data = json;
+            members = data.results[0].members;
+            createStates();
+            tablecreate();
+
+
+        }).catch(function (error) {
+            console.log("Request failed:" + error.message);
+        });
+
+    }
+}
+//var members = data.results[0].members;
+
+calljson();
 
 function tablecreate() {
 
@@ -65,7 +116,7 @@ function tablecreate() {
 
 
 function checkb() {
-   
+
     var selectedv = document.getElementById("cstate").value;
     console.log(selectedv);
     var tds = document.getElementsByTagName("tr");
@@ -84,7 +135,7 @@ function checkb() {
         if (tds[s].classList.contains("I") == true && document.getElementById("I").checked == true && (tds[s].classList.contains(selectedv) == true)) {
             tds[s].style.display = "table-row";
         }
-        
+
         if (tds[s].classList.contains("R") == true && document.getElementById("R").checked == true && selectedv == "all") {
             tds[s].style.display = "table-row";
         }
@@ -132,8 +183,8 @@ function createStates() {
     uniqueStates = states.filter(function (item, pos) {
         return states.indexOf(item) == pos;
     })
-
-    console.log(uniqueStates);
+    //
+    //    console.log(uniqueStates);
 
     var stateoptions = document.getElementById("cstate");
 
@@ -145,8 +196,8 @@ function createStates() {
 
 }
 
-
-
-createStates();
-
-tablecreate();
+//
+//
+//createStates();
+//
+//tablecreate();

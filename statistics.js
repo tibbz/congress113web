@@ -325,18 +325,10 @@ function conditions() {
         mostengagedtable();
     }
 
-    //    if (document.getElementById("senate-most-engaged") != null) {
-    //        mostengagedtable();
-    //    }
-
     if ((document.getElementById("senate-most-loyal") != null) && (document.getElementById("senate-least-loyal") != null)) {
             mostloyalvotestable();
             leastloyalvotestable();
         }
     }
-
-    //    if (document.getElementById("senate-least-loyal") != null) {
-    //        leastloyalvotestable();
-    //    }
 
     conditions();

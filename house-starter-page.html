@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="stylessheet/general.css">
+</head>
+
+<body>
+    <img src="tgiflogo.jpg" alt="tgif logo" class="logo">
+    <nav>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="home-starter-page.html">Home</a></li>
+                
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Congnm">Congress 113 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="senate-starter-page.html">Senate</a></li>
+                        <li><a href="house-starter-page.html">House</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Attem">Attendance <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="senate-attendance.html">Senate</a></li>
+                        <li><a href="house-attendance.html">House</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Partm">Party Loyalty <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="senate-party-loyalty.html">Senate</a></li>
+                        <li><a href="house-party-loyalty.html">House</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div id="senatedata" class="container"></div>
+    <h2>Congressmen</h2>
+    <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills must also be passed by the Senate and further agreed to by the U.S. President before becoming law (unless both the House and Senate re-pass the legislation with a two-thirds majority in each chamber). The House has some exclusive powers: the power to initiate revenue bills, to impeach officials (impeached officials are subsequently tried in the Senate), and to elect the U.S. President in case there is no majority in the Electoral College.</p>
+    <p>Each U.S. state is represented in the House in proportion to its population as measured in the census, but every state is entitled to at least one representative. </p>
+
+    <div class="checkboxes">
+        <p>Filter by Party:</p>
+        <input type="checkbox" id="R" name="party1" value="R" onClick="checkb()" checked> Republican<br>
+        <input type="checkbox" id="D" name="party2" value="D" onClick="checkb()" checked> Democrat<br>
+        <input type="checkbox" id="I" name="party3" value="I" onClick="checkb()" checked> Independent<br>
+    </div>
+    
+    <div>
+        <select id="cstate" class="options" onchange="checkb()">
+            <option value="all">Filter by State</option>
+        </select>
+    </div>
+
+    <div class="panel panel-default">
+        <table id="senate-table" class="table table-striped">
+            <thead>
+                <tr id="tablehead">
+                    <th>Name</th>
+                    <th>Party</th>
+                    <th>State</th>
+                    <th>Years in office</th>
+                    <th>% Votes with party</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script src="pro-congress-113-house.js"></script>
+    <script src="mainhouse.js"></script>
+
+</body>
+
+</html>

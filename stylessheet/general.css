@@ -1,0 +1,19 @@
+.logo {
+    width: 150px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+/*
+if-not-collapsed {
+    display: none;
+}
+
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+  display: none;
+}
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+  display: none;
+}
+*/
+
+

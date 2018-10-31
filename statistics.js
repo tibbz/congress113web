@@ -237,7 +237,6 @@ function mostloyalvotestable() {
 }
 
 function leastengaged() {
-
     var memcopy3 = members.slice(0);
     memcopy3.sort(function (a, b) {
         return a.votes_with_party_pct - b.votes_with_party_pct
@@ -257,9 +256,7 @@ function leastengaged() {
             leastengagedvotes.push(more);
         }
     }
-
     statistics.leastengagedvotes = leastengagedvotes;
-
 }
 
 function leastengagedtable() {

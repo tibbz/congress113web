@@ -9,71 +9,84 @@
 </head>
 
 <body>
-    <div class="container" id="senate">
-        <img src="tgiflogo.jpg" alt="tgif logo" class="logo">
-        <nav>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="home-starter-page.html">Home</a></li>
-
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Congnm">Congress 113 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="senate-starter-page.html">Senate</a></li>
-                            <li><a href="house-starter-page.html">House</a></li>
+    <div id="app">
+        <div class="container" id="senate">
+            <div class="bodyflex">
+                <img src="tgiflogo.jpg" alt="tgif logo" class="logo">
+                <nav>
+                    <div class="menuz">
+                        <ul class="nav navbar-nav">
+                            <li><a href="home-starter-page.html">Home</a></li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Congnm">Congress 113 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="active"><a href="senate-starter-page.html">Senate</a></li>
+                                    <li><a href="house-starter-page.html">House</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Attem">Attendance <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="senate-attendancewvue.html">Senate</a></li>
+                                    <li><a href="house-attendance%20vue.html">House</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Partm">Party Loyalty <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="senate-party-loyalty%20vue.html">Senate</a></li>
+                                    <li><a href="house-party-loyalty%20vue.html">House</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
+                    </div>
+                </nav>
 
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Attem">Attendance <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="senate-attendance.html">Senate</a></li>
-                            <li><a href="house-attendance.html">House</a></li>
-                        </ul>
-                    </li>
+                <div id="senatedata" class="container"></div>
+                <h2>Senators</h2>
+                <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
 
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="Partm">Party Loyalty <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="senate-party-loyalty.html">Senate</a></li>
-                            <li><a href="house-party-loyalty.html">House</a></li>
-                        </ul>
-                    </li>
+                <div class="checkboxes">
+                    <p>Filter by Party:</p>
+                    <input type="checkbox" id="R" name="party1" value="R" @click="checkb" checked> Republican<br>
+                    <input type="checkbox" id="D" name="party2" value="D" @click="checkb" checked> Democrat<br>
+                    <input type="checkbox" id="I" name="party3" value="I" @click="checkb" checked> Independent<br>
+                </div>
 
-                </ul>
+                <div>
+                    <select id="cstate" class="options" @change="checkb">
+                        <option value="all">Filter by State</option>
+                        <option v-for="state in uniqueStates">{{state}}</option>
+                    </select>
+                </div>
+
+                <div class="panel panel-default">
+                    <table id="senate-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Party</th>
+                                <th>State</th>
+                                <th>Years in office</th>
+                                <th>% Votes with party</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="member in members" v-bind:class="[member.party, member.state]">
+                                <td v-if="member.middle_name === null"><a :href="member.url">{{member.first_name + " " + member.last_name}}</a></td>
+                                <td v-else><a :href="member.url">{{member.first_name + " " + member.middle_name + " " + member.last_name}}</a></td>
+                                <td>{{member.party}}</td>
+                                <td>{{member.state}}</td>
+                                <td>{{member.seniority}}</td>
+                                <td>{{member.votes_with_party_pct}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </nav>
-
-        <div id="senatedata" class="container"></div>
-        <h2>Senators</h2>
-        <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
-
-        <div class="checkboxes">
-            <p>Filter by Party:</p>
-            <input type="checkbox" id="R" name="party1" value="R" onClick="checkb()" checked> Republican<br>
-            <input type="checkbox" id="D" name="party2" value="D" onClick="checkb()" checked> Democrat<br>
-            <input type="checkbox" id="I" name="party3" value="I" onClick="checkb()" checked> Independent<br>
-        </div>
-
-        <div>
-            <select id="cstate" class="options" onchange="checkb()">
-                <option value="all">Filter by State</option>
-            </select>
-        </div>
-
-        <div class="panel panel-default">
-            <table id="senate-table" class="table table-striped">
-                <thead>
-                    <tr id="tablehead">
-                        <th>Name</th>
-                        <th>Party</th>
-                        <th>State</th>
-                        <th>Years in office</th>
-                        <th>% Votes with party</th>
-                    </tr>
-                </thead>
-            </table>
         </div>
     </div>
+
     <!--    <script src="pro-congress-113-senate.js"></script>-->
-    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="mainvue.js"></script>
 
 </body>
 

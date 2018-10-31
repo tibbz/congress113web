@@ -170,7 +170,7 @@ function createStates() {
     uniqueStates = states.filter(function (item, pos) {
         return states.indexOf(item) == pos;
     })
-    
+
     var stateoptions = document.getElementById("cstate");
 
     for (var x = 0; x < uniqueStates.length; x++) {

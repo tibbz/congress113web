@@ -16,4 +16,12 @@ if-not-collapsed {
 }
 */
 
+.bodyflex {
+    display: flex;
+    flex-direction: column;
+}
 
+.table1 {
+    display: :flex;
+    flex-direction: row;
+}

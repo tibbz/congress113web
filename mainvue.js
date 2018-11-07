@@ -9,7 +9,7 @@ var app = new Vue({
     },
 
     created: function () {
-        document.body.className= "loader";
+//        document.body.className= "loader";
         this.calljson();
 
     },
@@ -30,9 +30,10 @@ var app = new Vue({
                     }
 
                 }).then(function (json) {
+//                    document.body.className= "";
                     app.members = json.results[0].members;
                     app.createStates();
-                    document.body.className= "";
+                    
 
 
                 }).catch(function (error) {
@@ -51,9 +52,10 @@ var app = new Vue({
                     }
 
                 }).then(function (json) {
+//                    document.body.className= "";
                     app.members = json.results[0].members;
                     app.createStates();
-                    document.body.className= "";
+                    
 
                 }).catch(function (error) {
                     console.log("Request failed:" + error.message);

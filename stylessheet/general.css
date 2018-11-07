@@ -1,12 +1,3 @@
-.logo {
-    width: 150px;
-    border-radius: 50%;
-    margin-left: 10px;
-}
-/*
-if-not-collapsed {
-    display: none;
-}
 
 [data-toggle="collapse"]:not(.collapsed) .if-collapsed {
   display: none;
@@ -14,14 +5,92 @@ if-not-collapsed {
 [data-toggle="collapse"].collapsed .if-not-collapsed {
   display: none;
 }
-*/
 
-.bodyflex {
+body {
+    background-color: floralwhite;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.container {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
-.table1 {
-    display: :flex;
-    flex-direction: row;
+.contentall {
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
+.logo {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.menuz {
+    display: flex;
+}
+
+.aligned {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 50%;
+}
+
+.glance {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    width: 50%;
+}
+
+.aligned2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.leastaligned {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 10px;
+    width: 50%;
+}
+
+.mostaligned {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 50%;
+}
+
+.panel.panel-default {
+    margin-top: 20px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; 
+    border-top: 16px solid #3498db; 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
